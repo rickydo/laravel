@@ -9,7 +9,8 @@ class TodoListController extends \BaseController {
 	 */
 	public function index()
 	{
-		return View::make('todos.index');
+		$todo_lists = TodoList::all();
+		return View::make('todos.index')->with('todo_lists', $todo_lists);
 	}
 
 
@@ -20,7 +21,10 @@ class TodoListController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		$list = new TodoList();
+		$list->name = "new list";
+		$list->save();
+		return "created a new list";
 	}
 
 
@@ -43,7 +47,8 @@ class TodoListController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		return View::make('todos.show')->withId($id);
+		$list = TodoList::findOrFail($id);
+		return View::make('todos.show')->withList($list);
 	}
 
 
