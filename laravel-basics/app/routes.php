@@ -11,9 +11,14 @@
 |
 */
 
+Route::get('/', 'TodoListController@index');
 Route::resource('todos', 'TodoListController');
 
-// Route::get('/', 'TodoListController@index');
+Route::get('/db', function(){
+	$result = DB::table('todo_lists')->where('name', "Ricky's List")->first();
+	return $result->name;
+});
+
 // Route::get('todos', 'TodoListController@index');
 // Route::get('todos/{id}', 'TodoListController@show');
 
