@@ -13,25 +13,15 @@
 
 Route::get('/', function()
 {
-
-$data = [	'name' => 'jane', 
-			'email' => 'jane@doe.com',
-			'locaton' => 'Florida',
-			'last_name' => 'Doe'];
-
-	// return View::make('hello', array('name' => 'friend'));
-	// return View::make('hello')->withName('friend');
-	// return View::make('hello')->with('name', 'friend');
-	return View::make('hello')->withData($data);
-
+	return View::make('todos.index');
+});
+Route::get('todos', function()
+{
+	return View::make('todos/index');
 });
 
 
-
-// if name doesn't exist it defaults to world
-// a ? makes having a name optional
-// Route::get('/hello/{name?}', function($name = 'world')
-// {
-// 	return View::make('hello')->with('name', $name);
-
-// });
+Route::get('todos/{id}', function($id)
+{
+	return View::make('todos.show')->withId($id);
+});
