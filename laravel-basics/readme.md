@@ -27,3 +27,12 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 to connect to database 
 homestead ssh -> mysql -u homestead -p -> secret -> show databases -> create database <name> 
+
+to create a migration table
+ssh into homestead -> laravel-basics -> php artisan migrate:make create_todo_lists_table --create=todo_lists
+
+to migrate
+php artisan migrate
+
+to fake a column addition
+php artisan migrate --pretend
