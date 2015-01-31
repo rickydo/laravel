@@ -39,7 +39,7 @@ class TodoListController extends \BaseController {
 	{
 		//rules
 		$rules = array(
-			'title' => array('required', 'unique:todo_lists,name')
+			'name' => array('required', 'unique:todo_lists')
 			);
 
 		// pass input tp validator
@@ -49,7 +49,7 @@ class TodoListController extends \BaseController {
 		if ($validator->fails()){
 			return Redirect::route('todos.create')->withErrors($validator)->withInput();
 		}
-		$name = Input::get('title');
+		$name = Input::get('name');
 		$list = new TodoList();
 		$list->name = $name;
 		$list->save();
