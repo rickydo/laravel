@@ -47,7 +47,7 @@ class TodoListController extends \BaseController {
 
 		//redirect
 		if ($validator->fails()){
-			return Redirect::route('todos.create');
+			return Redirect::route('todos.create')->withErrors($validator)->withInput();
 		}
 		$name = Input::get('title');
 		$list = new TodoList();

@@ -3,6 +3,7 @@
 	{{Form::open(array('route' => 'todos.store'))}}
 		{{Form::label('title', "List Title")}}
 		{{Form::text('title')}}
+		{{$errors->first('title','<small class="error">:message</small>')}}
 		{{Form::submit('Submit', array('class' => 'button'))}}
 	{{Form::close()}}
 	<!-- <form method="POST" action="http://homestead.app/todos" accept-charset="UTF-8">
