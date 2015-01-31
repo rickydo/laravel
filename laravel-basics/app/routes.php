@@ -19,6 +19,9 @@ Route::get('/db', function(){
 	return $result->name;
 });
 
+// Event::listen('illuminate.query', function($query){
+// 	var_dump($query);
+// });
 // Route::get('todos', 'TodoListController@index');
 // Route::get('todos/{id}', 'TodoListController@show');
 

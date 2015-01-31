@@ -66,7 +66,8 @@ class TodoListController extends \BaseController {
 	public function show($id)
 	{
 		$list = TodoList::findOrFail($id);
-		return View::make('todos.show')->withList($list);
+		$items = $list->listItems()->get();
+		return View::make('todos.show')->withList($list)->withItems($items);
 	}
 
 
