@@ -78,7 +78,8 @@ class TodoListController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$list = TodoList::findOrFail($id);
+		return View::make('todos.edit')->withList($list);
 	}
 
 
