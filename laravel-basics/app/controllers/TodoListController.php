@@ -2,6 +2,11 @@
 
 class TodoListController extends \BaseController {
 
+	// everytime we instantiate a new list, a before filter will check for CSRF
+	// only on post methods
+	public function __construct(){
+		$this->beforeFilter('csrf', array('on' => 'post'));
+	}
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -21,10 +26,7 @@ class TodoListController extends \BaseController {
 	 */
 	public function create()
 	{
-		$list = new TodoList();
-		$list->name = "new list";
-		$list->save();
-		return "created a new list";
+		return View::make('todos.create');
 	}
 
 
@@ -35,7 +37,23 @@ class TodoListController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		//rules
+		$rules = array(
+			'title' => array('required', 'unique:todo_lists,name')
+			);
+
+		// pass input tp validator
+		$validator = Validator::make(Input::all(), $rules);
+
+		//redirect
+		if ($validator->fails()){
+			return Redirect::route('todos.create');
+		}
+		$name = Input::get('title');
+		$list = new TodoList();
+		$list->name = $name;
+		$list->save();
+		return Redirect::route('todos.index');
 	}
 
 
